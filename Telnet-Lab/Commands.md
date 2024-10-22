@@ -13,3 +13,9 @@ Router>en
 Router#conf t
 Router(config)#hostname R1
 R1(config)#enable password cisco
+
+### 2. Configure IP Address on GigabitEthernet 0/0
+
+R1(config)#int gig0/0
+R1(config-if)#ip add 1.1.1.222 255.0.0.0
+R1(config-if)#no shut
