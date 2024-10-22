@@ -7,10 +7,9 @@ This topology consists of:
 
 ## **Router Configuration (R1)**
 
-### 1. Enter Privileged EXEC Mode
+### 1. Basic Configurations
 ```bash
 Router>en
-
-### 2. Enter Global Configuration Mode
-```bash
 Router#conf t
+Router(config)#hostname R1
+R1(config)#enable password cisco
