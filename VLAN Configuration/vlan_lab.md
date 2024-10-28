@@ -1,7 +1,9 @@
 # VLAN Configuration Lab
 
 **What is  a VLAN?**
-A VLAN is the process of creating virtual groups on a switch; Basically, it is just like making separate classrooms in a school. What would happen if there were no separate classrooms for each class students?
+
+A VLAN is the process of creating virtual groups on a switch; Basically, it is just like making separate classrooms in a school. 
+What would happen if there were no separate classrooms for each class students?
 I hope you understood the concept!
 
 This document contains the step-by-step VLAN configurations for Switch 1 and Switch 2, along with screenshots from the lab.
