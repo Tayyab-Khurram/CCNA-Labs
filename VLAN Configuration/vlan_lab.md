@@ -134,9 +134,13 @@ SW-B#sh vlan brief
 ### When the switches are attached to each other and the VLANs are assigned, the HR Department devices should be able to communicate with the newly added devices
 ![Screenshot-15](https://github.com/user-attachments/assets/d1366652-3046-453c-a7f3-ec7cb2aad6aa)
 ### We see that the devices are not pinging each other, But Why?
+
 Because, The default mode for a switch port is access mode; A switch port in access mode is designed to carry traffic for only one VLAN, typically used when connecting individual devices like desktops to the network.
+
 **We need to configure the switch port mode of the SW-A as Trunk Mode!** Now what is this Trunk Mode?
+
 A switch port in trunk mode can carry traffic for multiple VLANs, allowing communication between different VLANs on a single link. It is used to connect devices that need to access multiple VLANs. Right?
+
 So let's configure the switchport mode of the SW-A as trunk mode.
 ## Step 9: Configure Trunk Port
 ```bash
