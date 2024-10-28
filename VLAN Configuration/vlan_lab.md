@@ -1,5 +1,9 @@
 # VLAN Configuration Lab
 
+**What is  a VLAN?**
+A VLAN is the process of creating virtual groups on a switch; Basically, it is just like making separate classrooms in a school. What would happen if there were no separate classrooms for each class students?
+I hope you understood the concept!
+
 This document contains the step-by-step VLAN configurations for Switch 1 and Switch 2, along with screenshots from the lab.
 
 ## Topology Overview
@@ -124,3 +128,21 @@ SW-B(config)#exit
 SW-B#sh vlan brief 
 ```
 ![Screenshot-14](https://github.com/user-attachments/assets/ffc250de-680a-4221-9e6c-acda68638b4f)
+
+### When the switches are attached to each other and the VLANs are assigned, the HR Department devices should be able to communicate with the newly added devices
+![Screenshot-15](https://github.com/user-attachments/assets/d1366652-3046-453c-a7f3-ec7cb2aad6aa)
+### We see that the devices are not pinging each other, But Why?
+Because, The default mode for a switch port is access mode; A switch port in access mode is designed to carry traffic for only one VLAN, typically used when connecting individual devices like desktops to the network.
+**We need to configure the switch port mode of the SW-A as Trunk Mode!** Now what is this Trunk Mode?
+A switch port in trunk mode can carry traffic for multiple VLANs, allowing communication between different VLANs on a single link. It is used to connect devices that need to access multiple VLANs. Right?
+So let's configure the switchport mode of the SW-A as trunk mode.
+## Step 9: Configure Trunk Port
+```bash
+SW-A>en
+SW-A#conf t
+SW-A(config)#int fa0/7
+SW-A(config-if)#switchport mode trunk
+```
+### After configuring the mode as trunk, the devices from different VLANS are now able to ping each other 
+![Screenshot-16](https://github.com/user-attachments/assets/e492e788-d468-4a78-9b05-68d8df92c44c)
+## Notes
