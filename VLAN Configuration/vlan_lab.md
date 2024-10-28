@@ -152,3 +152,6 @@ SW-A(config-if)#switchport mode trunk
 ### After configuring the mode as trunk, the devices from different VLANS are now able to ping each other 
 ![Screenshot-16](https://github.com/user-attachments/assets/e492e788-d468-4a78-9b05-68d8df92c44c)
 ## Notes
+_VLANs were created to segment network traffic for different departments.
+Trunk Ports were set up to allow VLAN traffic between switches.
+The VTP domain is set as HOME to ensure VLAN consistency between switches._
