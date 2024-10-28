@@ -6,7 +6,6 @@ This document contains the step-by-step VLAN configurations for Switch 1 and Swi
 ![Screenshot-1](https://github.com/user-attachments/assets/faed5cda-3371-4958-b502-1129564ffcb9)
 
 ## Step 1: Switch 1 Configuration
-
 ```bash
 Switch>en
 Switch#conf t
@@ -70,5 +69,58 @@ SW-A#sh vlan brief
 ![Screenshot-7](https://github.com/user-attachments/assets/88b1ed78-0cbe-4cb2-b65e-89da960b4835)
 ### After making the VLANS, the devices are not able to ping each other
 ![Screenshot-8](https://github.com/user-attachments/assets/5ee6e845-6bfb-46c9-b65f-48ff99349c7e)
-![Screenshot-9](https://github.com/user-attachments/assets/1b93a80a-a7f8-4509-8a93-cf5a1c39a869)
 ![Screenshot-10](https://github.com/user-attachments/assets/ffee27c6-a0b2-475b-9bdb-097981a4e9ac)
+### The devices within the same VLAN can ping each other but not from different VLANS
+![Screenshot-9](https://github.com/user-attachments/assets/1b93a80a-a7f8-4509-8a93-cf5a1c39a869)
+![Screenshot-11](https://github.com/user-attachments/assets/dd3cdc24-3ffb-481f-88a6-496b8e93eed8)
+
+#### Suppose all the ports on the switch are assigned to some VLANs, and more devices arrive for HR and Testing Department, so we add another switch and connect the devices to them
+![Screenshot 12](https://github.com/user-attachments/assets/5c71cd15-3dec-4d62-9fdb-61fdc36963b0)
+![Screenshot-13](https://github.com/user-attachments/assets/ade7f77f-4af4-424e-8429-412b1a13b31f)
+
+## Step 5: Switch 2 Configuration
+```bash
+Switch>en
+Switch#conf t
+Switch(config)#hostname SW-B
+SW-A(config)#exit
+```
+## Step 6: Check VTP Status and Configure VTP
+```bash
+SW-B#sh vtp status
+SW-B#conf t
+SW-B(config)#vtp domain HOME
+SW-B(config)#exit
+SW-B#sh vtp status 
+```
+## Step 7: Configure VLANs
+```bash
+SW-B#conf t
+SW-B(config)#vlan 2
+SW-B(config-vlan)#name HR-Department
+SW-B(config-vlan)#exit
+SW-B(config)#vlan 3
+SW-B(config-vlan)#name Testing-Department
+SW-B(config-vlan)#exit
+SW-B(config)#exit
+SW-B#sh vlan brief 
+```
+## Step 8: Assign VLANs to Interfaces
+```bash
+SW-B#conf t
+SW-B(config)#int fa0/1
+SW-B(config-if)#switchport access vlan 2
+SW-B(config-if)#exit
+SW-B(config)#int fa0/2
+SW-B(config-if)#switchport access vlan 2
+SW-B(config-if)#exit
+SW-B(config)#int fa0/3
+SW-B(config-if)#switchport access vlan 3
+SW-B(config-if)#exit
+SW-B(config)#int fa0/4
+SW-B(config-if)#switchport access vlan 3
+SW-B(config-if)#exit
+SW-B(config)#exit
+SW-B#sh vlan brief 
+```
+![Screenshot-14](https://github.com/user-attachments/assets/ffc250de-680a-4221-9e6c-acda68638b4f)
