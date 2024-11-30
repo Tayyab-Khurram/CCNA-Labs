@@ -75,7 +75,7 @@ R2(config)#access-list  ?
   # Defining the ACL
 R2(config)#access-list 33 deny host 192.168.0.9
 R2(config)#access-list 33 permit any
-	# Applying the ACL
+  # Applying the ACL
 R2(config)#int fa0/0
 R2(config-if)#ip access-group 33 in
 R2(config-if)#int se0/2/0
@@ -89,3 +89,31 @@ R2(config-if)#ip access-group 33 out
 Due to the use of the source IP address only, this solution is not as good as it filters traffic based on only the source IP address, so the intruder can change its IP address and again gain access to the network.  
 
 ## To solve this problem we use Extended ACLs
+Extended ACLs filter the packets based on various criteria like source and destination IP addresses, protocol type, and specific port numbers, providing a higher level of customization compared to a standard ACL which only considers the source IP address.
+
+![Screenshot 6](https://github.com/user-attachments/assets/934fcf2a-646b-4865-86e4-7e53798487b3)
+
+## Step 5: Denying a specific service through Extended ACLs
+
+### What I want is that the host with IP 150.1.0.7 should not be able to ping the device with IP 192.168.0.9, it should be able to ping all the other devices except this one
+
+```bash
+R1(config)#access-list 123 deny ?
+  ahp    Authentication Header Protocol
+  eigrp  Cisco's EIGRP routing protocol
+  esp    Encapsulation Security Payload
+  gre    Cisco's GRE tunneling
+  icmp   Internet Control Message Protocol
+  ip     Any Internet Protocol
+  ospf   OSPF routing protocol
+  tcp    Transmission Control Protocol
+  udp    User Datagram Protocol
+	# Defining the ACL
+R1(config)#access-list 123 deny icmp host 150.1.0.7 host 192.168.0.9
+R1(config)#access-list 123 permit icmp any any
+	# Applying the ACL
+R1(config-if)#ip access-group 123 in
+R1(config-if)#ip access-group 123 out
+```
+![Screenshot 7](https://github.com/user-attachments/assets/d027391d-1811-4295-9f9d-1b09140dc853)
+![Screenshot 8](https://github.com/user-attachments/assets/a49e19b5-3747-498a-900d-60a7d7b34998)
