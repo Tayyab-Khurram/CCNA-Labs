@@ -95,7 +95,7 @@ Extended ACLs filter the packets based on various criteria like source and desti
 
 ## Step 5: Denying a specific service through Extended ACLs
 
-### What I want is that the host with IP 150.1.0.7 should not be able to ping the device with IP 192.168.0.9, it should be able to ping all the other devices except this one
+### What I want is that the host with IP 192.168.0.9 should not be able to ping the device with IP 150.1.0.7, it should be able to ping all the other devices except this one
 
 ```bash
 R1(config)#access-list 123 deny ?
@@ -117,3 +117,5 @@ R1(config-if)#ip access-group 123 out
 ```
 ![Screenshot 7](https://github.com/user-attachments/assets/d027391d-1811-4295-9f9d-1b09140dc853)
 ![Screenshot 8](https://github.com/user-attachments/assets/a49e19b5-3747-498a-900d-60a7d7b34998)
+
+## This completes our ACL Lab
