@@ -85,4 +85,7 @@ R2(config-if)#ip access-group 33 out
 
 ![Screenshot 5](https://github.com/user-attachments/assets/17989ec8-03d0-48b8-a2d0-9cc6c4b8d5be)
 
-Now the device cannot communicate with the devices on the other network.
+### Now this device cannot communicate with the devices on the other network!   
+Due to the use of the source IP address only, this solution is not as good as it filters traffic based on only the source IP address, so the intruder can change its IP address and again gain access to the network.  
+
+## To solve this problem we use Extended ACLs
