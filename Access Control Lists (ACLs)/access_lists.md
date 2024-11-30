@@ -23,7 +23,6 @@ R1(config)#int se0/2/0
 R1(config-if)#ip add 100.0.0.1 255.0.0.0
 R1(config-if)#no shut
 ```
-
 ## Step 2: Router2 Configuration
 ```bash
 Router>en
@@ -38,3 +37,26 @@ R2(config)#int se0/2/0
 R2(config-if)#ip add 100.0.0.2 255.0.0.0
 R2(config-if)#no shut
 ```
+#### I hope you know how to assign IPs on the PCs and Laptops!
+#### Every device inside its own network can now ping other devices after assigning IP addresses
+
+![Screenshot 2](https://github.com/user-attachments/assets/fddbf33d-a65a-426d-b44e-12d72eb8f08c)
+
+## Step 3: Enabling Routing between the networks
+What is OSPF?  
+OSPF, or Open Shortest Path First, is a Link-State routing protocol used in IP networks.  
+It helps routers determine the best path for data to travel within a network. Here's a quick rundown:
+```bash
+R1(config)#router ospf 111
+R1(config-router)#network 150.1.0.0 0.0.255.255 area 0
+R1(config-router)#network 100.0.0.0 0.255.255.255 area 0
+```
+```bash
+R2(config)#router ospf 111
+R2(config-router)#network 192.168.0.0 0.0.0.255 area 0
+R2(config-router)#network 100.0.0.0 0.255.255.255 area 0
+R2(config-router)# 00:33:53: %OSPF-5-ADJCHG: Process 111, Nbr 150.1.0.1 on Serial0/2/0 from LOADING to FULL, Loading Done
+```
+#### After Enabling the routing, every device outside its own network can ping other devices.
+
+![Screenshot 3](https://github.com/user-attachments/assets/1071b68e-b63a-4b23-b3ed-bbbd1cf63700)
