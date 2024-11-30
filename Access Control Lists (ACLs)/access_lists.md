@@ -43,7 +43,7 @@ R2(config-if)#no shut
 ![Screenshot 2](https://github.com/user-attachments/assets/fddbf33d-a65a-426d-b44e-12d72eb8f08c)
 
 ## Step 3: Enabling Routing between the networks
-What is OSPF?  
+**What is OSPF?**  
 OSPF, or Open Shortest Path First, is a Link-State routing protocol used in IP networks.  
 It helps routers determine the best path for data to travel within a network. Here's a quick rundown:
 ```bash
@@ -60,3 +60,29 @@ R2(config-router)# 00:33:53: %OSPF-5-ADJCHG: Process 111, Nbr 150.1.0.1 on Seria
 #### After Enabling the routing, every device outside its own network can ping other devices.
 
 ![Screenshot 3](https://github.com/user-attachments/assets/1071b68e-b63a-4b23-b3ed-bbbd1cf63700)
+
+## Step 4: Denying the Intruder
+An intruder has gained access to our network and is able to communicate with each device since routing has been done already.
+
+![Screenshot 4](https://github.com/user-attachments/assets/30ebcbce-fda2-43ec-aaa7-56ca645fae4b)
+
+#### Now we will apply Standard ACL on the Router2 to block this device
+A "standard ACL" is a network security feature that filters traffic based only on the source IP address.
+```bash
+R2(config)#access-list  ?
+  <1-99>     IP standard access list
+  <100-199>  IP extended access list
+  # Defining the ACL
+R2(config)#access-list 33 deny host 192.168.0.9
+R2(config)#access-list 33 permit any
+	# Applying the ACL
+R2(config)#int fa0/0
+R2(config-if)#ip access-group 33 in
+R2(config-if)#int se0/2/0
+R2(config-if)#ip access-group 33 out
+```
+## After Applying the ACL:
+
+![Screenshot 5](https://github.com/user-attachments/assets/17989ec8-03d0-48b8-a2d0-9cc6c4b8d5be)
+
+Now the device cannot communicate with the devices on the other network.
